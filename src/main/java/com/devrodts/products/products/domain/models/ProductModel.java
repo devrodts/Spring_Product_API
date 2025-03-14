@@ -1,66 +1,46 @@
 package com.devrodts.products.products.domain.models;
+import java.util.List;
+import java.util.UUID;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Entity
+@Table(name = "products")
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class ProductModel {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.UUID)
+    private UUID productId;
+
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String name;
+
+    @NotBlank
+    @Size(min = 1)
     private Double price;
+
+    @NotBlank
+    @Size(min = 0)
     private int stock;
+
+    @NotBlank
     private String description;
+
+    @NotBlank
     private String image;
+
+    @NotBlank
     private String category;
 
-
-    public String getId(){
-        return id;
-    }
-
-    public void setId(String id){
-        this.id = id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-    public Double getPrice(){
-        return price;
-    }
-
-    public void setPrice(Double price){
-        this.price = price;
-    }
-    public int getStock(){
-        return stock;
-    }
-
-    public void setStock(int stock){
-        this.stock = stock;
-    }
-    public String getDescription(){
-        return description;
-    }
-
-    public void setDescription(String description){
-        this.description = description;
-    }
-
-    public String getImage(){
-        return image;
-    }
-
-    public void setImage(String image){
-        this.image = image;
-    }
-
-    public String getCategory(){
-        return category;
-    }
-
-    public void setCategory(String category){
-        this.category = category;
-    }
+    @ManyToMany(mappedBy = "orders")
+    private List<OrderModel> orders;
 }
