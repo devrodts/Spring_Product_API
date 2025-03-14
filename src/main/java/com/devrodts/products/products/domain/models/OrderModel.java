@@ -11,7 +11,7 @@ public class OrderModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID orderId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.Lazy)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderModel> ordersItems;
 
     @Column(nullable = false)
